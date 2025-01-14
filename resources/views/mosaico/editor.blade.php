@@ -5,11 +5,9 @@
 
 <script>
 function downloadTemplateJson() {
-    // Access Mosaico's viewModel to get template data
     if (window.viewModel && window.viewModel.exportJSON) {
         const templateJson = window.viewModel.exportJSON();
         
-        // Create and download the JSON file
         const blob = new Blob([JSON.stringify(templateJson, null, 2)], { type: 'application/json' });
         const url = window.URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -49,7 +47,6 @@ function loadTemplate(input) {
 function saveTemplateToServer() {
     const templateJson = window.viewModel.exportJSON();
     
-    // Using Laravel's CSRF token
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
     
     fetch('/save-template', {
@@ -72,7 +69,6 @@ function saveTemplateToServer() {
 }
 
 window.onload = function() {
-    // Access the iframe's window object
     const editorWindow = document.querySelector('iframe').contentWindow;
     window.viewModel = editorWindow.viewModel;
 }
